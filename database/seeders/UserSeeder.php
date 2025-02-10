@@ -20,7 +20,8 @@ class UserSeeder extends Seeder
             'email'=> 'jose.jdgo97@gmail.com',
             'email_verified_at' => now(),            
             'password'=> bcrypt('123123123'),
-        ])->assignRole('Admin');
+        ])->assignRole('admin');
+
         User::create([
             'name'=>'Juan David Grijalba Osorio',
             'sexo'=> 'M',
@@ -28,16 +29,16 @@ class UserSeeder extends Seeder
             'email'=> 'juandavidgo1997@gmail.com',
             'email_verified_at' => now(),            
             'password'=> bcrypt('123123123'),
-        ])->assignRole('Blogger');
+        ])->assignRole('funcionario');
 
         User::create([
-            'name'=>'Hebron Teacher',
+            'name'=>'Hebron funcionario',
             'sexo'=> 'M',
             'telefono'=>'314852686',
             'email'=> 'hebron.customer@gmail.com',
             'email_verified_at' => now(),            
             'password'=> bcrypt('123123123'),
-        ])->assignRole('Profesor');
+        ])->assignRole('funcionario');
 
         User::create([
             'name'=>'Mario',
@@ -46,7 +47,7 @@ class UserSeeder extends Seeder
             'email'=> 'mario@gmail.com',
             'email_verified_at' => now(),            
             'password'=> bcrypt('123123123'),
-        ])->assignRole('Alumno');
+        ])->assignRole('funcionario');
 
         User::create([
             'name'=>'Alejandro',
@@ -55,7 +56,7 @@ class UserSeeder extends Seeder
             'email'=> 'alejo@gmail.com',
             'email_verified_at' => now(),            
             'password'=> bcrypt('123123123'),
-        ])->assignRole('Alumno');
+        ])->assignRole('funcionario');
         
         User::factory(9)->create();
     }

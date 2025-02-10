@@ -30,8 +30,8 @@ return [
     |
     */
 
-    'use_ico_only' => false,
-    'use_full_favicon' => false,
+    'use_ico_only' => true,
+    'use_full_favicon' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/HEBRON.png',
             'alt' => 'HEBRON',
@@ -256,7 +256,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/',
+    'dashboard_url' => '/admin',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -311,90 +311,27 @@ return [
         // ],
         // [
         //     'text' => 'blog',
-        //     'url' => 'admin/blog',
-        //     'can' => 'manage-blog',
-        // ],
-        // [
-        //     'text' => 'Usuarios',
         //     'route' => 'admin.home',
-        //     'icon' => 'fas fa-users fa-fw ',
+        //     // 'icon' => 'fas fa-home fa-fw ',
+        //     // 'can' => 'manage-blog',
         // ],
         [
             'text' => 'Dashboard',
-            // 'url' => 'admin/pages',
             'route' => 'admin.home',
             'icon' => 'fas fa-home fa-fw ',
         ],
         [
             'text'        => 'Usuarios',
             'route'         => 'admin.users.index',
-            'icon'        => 'bi bi-people-fill',
+            'icon' => 'fas fa-users fa-fw ',
             'can'  => 'admin.users.index',
         ],
-        ['header' => 'ADMINISTRADOR'],
+        // ['header' => 'ADMINISTRADOR'],
+        // ['header' => 'OPCIONES DE BLOG'],
         [
-            'text' => 'Vehiculos',
-            'route' => 'admin.vehiculos.index',
-            'icon' => 'far fa-fw fa-bookmark',
-            'active' => ['admin/vehiculos*'],
-            // 'can'  => 'admin.users.index',
-        ],
-        [
-            'text' => 'Cursos',
-            'route' => 'admin.cursos.index',
-            'icon' => 'far fa-fw fa-bookmark',
-            'active' => ['admin/cursos*'],
-            // 'can'  => 'admin.users.index',
-        ],
-        // [
-        //     'text' => 'Clases',
-        //     'route' => 'admin.clases.index',
-        //     'icon' => 'far fa-fw fa-bookmark',
-        //     'active' => ['admin/clases*'],
-        //     // 'can'  => 'admin.users.index',
-        // ],
-        // [
-        //     'text' => 'multilevel',
-        //     'icon' => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url' => '#',
-        //                 ],
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url' => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url' => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url' => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //         ],
-        //     ],
-        // ],
-        ['header' => 'OPCIONES DE BLOG'],
-        [
-            'text' => 'Posts',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Departamento Secretaría Distrital de Movilidad',
+            'icon' => 'fas fa-building', // Usa un icono adecuado de Font Awesome
+            'icon_color' => 'success', // Color verde
             'submenu' => [
                 [
                     'text' => 'Categorias',
@@ -408,7 +345,8 @@ return [
                     'route' => 'admin.tags.index',
                     'icon' => 'far fa-fw fa-bookmark',
                     'active' => ['admin/tags*'],
-                ],        [
+                ],
+                [
                     'text' => 'Lista de post',
                     // 'icon_color' => 'red',
                     'route' => 'admin.posts.index',
@@ -420,11 +358,19 @@ return [
                     // 'icon_color' => 'yellow',
                     'route' => 'admin.posts.create',
                     'icon' => 'fas fa-fw fa-file',
-        
+
                 ],
             ],
         ],
-
+        // [
+        //     'key' => 'pages',
+        //     'text' => 'Pages',
+        //     'url' => 'admin/index',
+        //     'icon' => 'fas fa-user-plus',
+        //     'label'   => '6',
+        //     'label_color' => 'success', // Color verde
+        // ],
+        
         // [
         //     'text' => 'information',
         //     'icon_color' => 'cyan',
@@ -467,37 +413,93 @@ return [
     */
 
     'plugins' => [
-        'Datatables' => [
-            'active' => false,
+        'FontAwesome' => [
+            'active' => true,
             'files' => [
                 [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
-                ],
-                [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                    'asset' => true,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
                 ],
             ],
         ],
-        'Select2' => [
-            'active' => false,
+        'Datatables' => [
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/2.1.5/js/dataTables.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/2.1.5/js/dataTables.bootstrap4.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.0/js/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.0/js/buttons.flash.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.0/js/buttons.html5.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.0/js/buttons.print.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.0/js/buttons.colVis.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/2.1.5/css/jquery.dataTables.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.0/css/buttons.dataTables.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css',
+                ],
+            ],
+        ],
+
+        'Select2' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
@@ -513,12 +515,17 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css',
+                ],
+                [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'asset' => true,
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],
@@ -534,6 +541,21 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'toastr' => [ //it isnt working
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js',
                 ],
             ],
         ],

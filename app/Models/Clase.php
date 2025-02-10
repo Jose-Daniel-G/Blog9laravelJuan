@@ -11,7 +11,7 @@ class Clase extends Model
     use HasFactory;
 
     protected $fillable = [
-        'alumno_id', 'profesor_id', 'vehiculo_id', 'curso_id', 'fecha_hora', 'duracion', 'estado'
+        'alumno_id', 'funcionario_id', 'vehiculo_id', 'curso_id', 'fecha_hora', 'duracion', 'estado'
     ];
 
     public function alumno()
@@ -19,9 +19,9 @@ class Clase extends Model
         return $this->belongsTo(User::class, 'alumno_id');
     }
 
-    public function profesor()
+    public function funcionario()
     {
-        return $this->belongsTo(User::class, 'profesor_id');
+        return $this->belongsTo(User::class, 'funcionario_id');
     }
 
     public function vehiculo()

@@ -7,7 +7,7 @@ return [
     'action'          => 'Acció',
     'actions'         => 'Accions',
     'add'             => 'Afegeix',
-    'admin'           => 'Admin',
+    'admin'           => 'admin',
     'agree'           => 'Acordar',
     'archive'         => 'Arxiu',
     'assign'          => 'Assignar',

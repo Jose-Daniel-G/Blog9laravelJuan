@@ -7,7 +7,7 @@ return [
     'action'          => 'Tindakan',
     'actions'         => 'Tindakan',
     'add'             => 'Menambahkan',
-    'admin'           => 'Admin',
+    'admin'           => 'admin',
     'agree'           => 'Setuju',
     'archive'         => 'Arsip',
     'assign'          => 'Menetapkan',

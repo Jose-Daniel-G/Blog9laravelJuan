@@ -7,7 +7,7 @@ return [
     'action'          => 'Akció',
     'actions'         => 'Akciók',
     'add'             => 'Hozzáadás',
-    'admin'           => 'Admin',
+    'admin'           => 'admin',
     'agree'           => 'Egyetért',
     'archive'         => 'Archívum',
     'assign'          => 'Hozzárendelni',

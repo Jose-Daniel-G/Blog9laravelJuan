@@ -7,7 +7,7 @@ return [
     'action'          => 'Akcia',
     'actions'         => 'Akcie',
     'add'             => 'Pridať',
-    'admin'           => 'Admin',
+    'admin'           => 'admin',
     'agree'           => 'Súhlasím',
     'archive'         => 'Archív',
     'assign'          => 'Priradiť',
