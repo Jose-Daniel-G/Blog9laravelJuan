@@ -28,3 +28,15 @@ Route::post('/upload-csv', [ActividadesTransporteController::class, 'uploadCSV']
 use App\Http\Controllers\FileUploadController;
 
 Route::post('/upload-pdf', [FileUploadController::class, 'upload'])->name('upload.pdf');
+Route::get('/upload-multiple-pdf', [FileUploadController::class, 'showUploadMultiple'])->name('upload.multiple.form');
+Route::post('/upload-multiple-pdf', [FileUploadController::class, 'uploadMultiple'])->name('upload.multiple.pdf');
+
+// RUTAS MULTIMEDIA ADMIN
+use App\Http\Controllers\PythonController;
+
+Route::get('/ejecutar-python', [PythonController::class, 'index'])
+    ->name('admin.multimedia.index')
+    ->middleware('auth');
+
+Route::post('/ejecutar-python', [PythonController::class, 'store'])
+    ->name('ejecutar-python');

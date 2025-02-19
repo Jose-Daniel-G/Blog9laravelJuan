@@ -72,7 +72,7 @@
                         <div class="icon">
                             <i class="ion fas bi bi-person-lines-fill"></i>
                         </div>
-                        <a href="" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('upload.multiple.form') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                         <div class="icon">
                             <i class="ion fas bi bi-calendar2-week"></i>
                         </div>
-                        <a href="http://carsliberty.test/admin/horarios" class="small-box-footer">Mas info <i
+                        <a href="{{ route('admin.users.index') }}" class="small-box-footer">Mas info <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                         <div class="icon">
                             <i class="fas fa-laptop"></i>
                         </div>
-                        <a href="" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('csv.form') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">

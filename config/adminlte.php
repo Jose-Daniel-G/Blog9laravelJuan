@@ -317,6 +317,11 @@ return [
         // ],
         [
             'text' => 'Dashboard',
+            'route' => 'admin.multimedia.index',
+            'icon' => 'fas fa-home fa-fw ',
+        ],
+        [
+            'text' => 'Dashboard',
             'route' => 'admin.home',
             'icon' => 'fas fa-home fa-fw ',
         ],
