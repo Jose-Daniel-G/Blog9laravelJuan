@@ -6,6 +6,7 @@ use App\Imports\ActividadesTransporteImport;
 use Exception;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ActividadesTransporteController extends Controller
 {
@@ -30,15 +31,18 @@ class ActividadesTransporteController extends Controller
             'pdf_files.*' => 'required|mimes:pdf|max:2048' // Validar cada archivo PDF en el array
         ]);
 
+        // Obtener el usuario autenticado
+        $usuario = Auth::user();
+        
+        // Extraer la parte antes del @ del email
+        $username = explode('@', $usuario->email)[0];
+        $folder = "secretaria_de_movilidad";
+
         // Verificar PDFs en el CSV
-        $response = $this->verificarPdfsEnCsv();
-
-
+        $response = $this->verificarPdfsEnCsv($username, $folder);
 
         if (!$response['success']) {
-            // // Verificar qué devuelve la función
-            // dd($response);
-            return redirect()->back()->with('error', $response['message']);
+               return redirect()->back()->with('error', $response['message']);
         }
 
         // Si todo está bien, importar el CSV
@@ -47,20 +51,19 @@ class ActividadesTransporteController extends Controller
         return redirect()->route('admin.multimedia.index')->with('success', 'Importación exitosa.');
     }
 
-
     // function verificarPdfsEnCsv($baseDir, $columnaNombrefde, $destino)
-    function verificarPdfsEnCsv()
+    function verificarPdfsEnCsv($username, $folder)
     {
         // Configuración de rutas
-        $baseDir = storage_path('app/public/pdfs'); // Nueva ruta correcta
-        $destino = $baseDir . '/archivo';
-        $columnaNombre = 'nom_con'; 
-
+        $baseDir = storage_path('app/public'); // Nueva ruta correcta 
+        $rutaCarpeta = $baseDir . '/users/'.$username; // Ruta Origen
+        $destino = $baseDir."/pdfs/" . $folder; // Ruta Destino
+        $columnaNombre = 'nom_con';
+        // dd($destino);
 
         try {
-
             // Obtener archivos de la carpeta
-            $archivos = scandir($baseDir);
+            $archivos = scandir($rutaCarpeta);
             $archivosCsv = array_filter($archivos, fn($archivo) => pathinfo($archivo, PATHINFO_EXTENSION) === 'csv');
             $archivosPdf = array_map(
                 fn($pdf) => strtolower(trim($pdf)),
@@ -80,7 +83,7 @@ class ActividadesTransporteController extends Controller
             }
 
             // Obtener el archivo CSV
-            $archivoCsv = $baseDir . '/' . reset($archivosCsv);
+            $archivoCsv = $rutaCarpeta . '/' . reset($archivosCsv);
             $csv = array_map('str_getcsv', file($archivoCsv));
 
             // Obtener encabezados del CSV
@@ -113,7 +116,7 @@ class ActividadesTransporteController extends Controller
             }
 
             foreach ($archivosPdf as $pdf) {
-                rename("$baseDir/$pdf", "$destino/$pdf");
+                rename("$rutaCarpeta/$pdf", "$destino/$pdf");
             }
 
             return ["success" => true, "message" => "Éxito: Todos los archivos PDF fueron movidos correctamente."];
