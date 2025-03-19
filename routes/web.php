@@ -16,11 +16,6 @@
 
     Route::get('/blog', [PostController::class, 'index'])->name('posts.index');
 
-    Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
-    Route::get('categories/{category}', [PostController::class, 'category'])->name('posts.category');
-    Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');
-
-
 
     Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
         ->group(function () {
@@ -29,8 +24,6 @@
             })->name('dashboard');
         });
 
-    // RUTAS MULTIMEDIA ADMIN
-    use App\Http\Controllers\PythonController;
 
     Route::get('/ejecutar-python', [ActividadesTransporteController::class, 'index'])
         ->name('admin.multimedia.index')

@@ -23,6 +23,9 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('dependencia_id');  // Columna para la clave foránea de 'clientes'
+            $table->foreign('dependencia_id')->references('id')->on('dependencias')->onDelete('cascade');
+            // $table->foreign('dependencia_id')->nullable()->constrained('dependencias')->onDelete('set null');
         });
     }
 

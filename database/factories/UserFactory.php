@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Dependencia;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,6 +20,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'dependencia_id' => Dependencia::inRandomOrder()->first()->id ?? Dependencia::factory()->create()->id, // Asigna un `dependencia_id` válid
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),

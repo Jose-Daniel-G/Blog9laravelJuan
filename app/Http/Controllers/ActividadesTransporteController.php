@@ -25,15 +25,9 @@ class ActividadesTransporteController extends Controller
         //
     }
     public function store(Request $request)
-    {
-        $request->validate([
-            'csv_file' => 'required|mimes:csv,xlsx|max:2048',
-            'pdf_files.*' => 'required|mimes:pdf|max:2048' // Validar cada archivo PDF en el array
-        ]);
-
-        // Obtener el usuario autenticado
+    {   // Obtener el usuario autenticado
         $usuario = Auth::user();
-        
+
         // Extraer la parte antes del @ del email
         $username = explode('@', $usuario->email)[0];
         $folder = "secretaria_de_movilidad";
@@ -42,88 +36,101 @@ class ActividadesTransporteController extends Controller
         $response = $this->verificarPdfsEnCsv($username, $folder);
 
         if (!$response['success']) {
-               return redirect()->back()->with('error', $response['message']);
+            return redirect()->back()->with('error', $response['message']);
         }
-
-        // Si todo está bien, importar el CSV
-        Excel::import(new ActividadesTransporteImport, $request->file('csv_file'));
 
         return redirect()->route('admin.multimedia.index')->with('success', 'Importación exitosa.');
     }
 
-    // function verificarPdfsEnCsv($baseDir, $columnaNombrefde, $destino)
+
     function verificarPdfsEnCsv($username, $folder)
     {
         // Configuración de rutas
         $baseDir = storage_path('app/public'); // Nueva ruta correcta 
-        $rutaCarpeta = $baseDir . '/users/'.$username; // Ruta Origen
-        $destino = $baseDir."/pdfs/" . $folder; // Ruta Destino
+        $rutaCarpeta = $baseDir . '/users/' . $username; // Ruta Origen
+        $destino = $baseDir . "/pdfs/" . $folder; // Ruta Destino
         $columnaNombre = 'nom_con';
-        // dd($destino);
-
+    
         try {
+            // Verificar si la carpeta existe
+            if (!is_dir($rutaCarpeta)) {
+                return ["success" => false, "message" => "Error: La carpeta de origen no existe."];
+            }
+    
             // Obtener archivos de la carpeta
             $archivos = scandir($rutaCarpeta);
-            $archivosCsv = array_filter($archivos, fn($archivo) => pathinfo($archivo, PATHINFO_EXTENSION) === 'csv');
+    
+            // Filtrar archivos CSV
+            $archivosCsv = array_filter($archivos, function ($archivo) use ($rutaCarpeta) {
+                return is_file($rutaCarpeta . '/' . $archivo) && pathinfo($archivo, PATHINFO_EXTENSION) === 'csv';
+            });
+    
+            // Filtrar archivos PDF y limpiar nombres
             $archivosPdf = array_map(
                 fn($pdf) => strtolower(trim($pdf)),
-                array_filter($archivos, fn($archivo) => pathinfo($archivo, PATHINFO_EXTENSION) === 'pdf')
+                array_filter($archivos, function ($archivo) use ($rutaCarpeta) {
+                    return is_file($rutaCarpeta . '/' . $archivo) && pathinfo($archivo, PATHINFO_EXTENSION) === 'pdf';
+                })
             );
-
+    
             if (empty($archivosCsv)) {
                 return ["success" => false, "message" => "Error: No se encontró ningún archivo CSV en la carpeta."];
             }
-
+    
             if (count($archivosCsv) > 1) {
                 return ["success" => false, "message" => "Error: Solo debe haber un archivo CSV en la carpeta."];
             }
-
+    
             if (empty($archivosPdf)) {
                 return ["success" => false, "message" => "Error: No hay suficientes archivos PDF."];
             }
-
+    
             // Obtener el archivo CSV
             $archivoCsv = $rutaCarpeta . '/' . reset($archivosCsv);
             $csv = array_map('str_getcsv', file($archivoCsv));
-
+    
             // Obtener encabezados del CSV
             $encabezados = array_map('trim', $csv[0]);
             $datos = array_slice($csv, 1);
-
+    
             if (!in_array($columnaNombre, $encabezados)) {
                 return ["success" => false, "message" => "Error: El archivo CSV no contiene la columna '$columnaNombre'."];
             }
-
+    
             // Obtener nombres válidos desde el CSV
             $indiceColumna = array_search($columnaNombre, $encabezados);
             $nombresValidos = array_map(fn($fila) => strtolower(trim($fila[$indiceColumna])), $datos);
-
+    
             // Verificar PDFs que no están en el CSV
             $pdfsFaltantes = array_filter($nombresValidos, fn($nombre) => !in_array("$nombre.pdf", $archivosPdf));
             $pdfNoEncontrados = array_filter($archivosPdf, fn($pdf) => !in_array(str_replace('.pdf', '', $pdf), $nombresValidos));
-
+    
             if (!empty($pdfNoEncontrados)) {
                 return ["success" => false, "message" => "Error: Los siguientes PDFs no están en el CSV: " . implode(", ", $pdfNoEncontrados)];
             }
-
+    
             if (!empty($pdfsFaltantes)) {
                 return ["success" => false, "message" => "Error: Faltan los siguientes PDFs: " . implode(", ", $pdfsFaltantes)];
             }
-
+    
             // Mover archivos PDF a la carpeta de destino
             if (!is_dir($destino)) {
                 mkdir($destino, 0777, true);
             }
-
+    
             foreach ($archivosPdf as $pdf) {
                 rename("$rutaCarpeta/$pdf", "$destino/$pdf");
             }
-
+    
+            // Importar el CSV
+            Excel::import(new ActividadesTransporteImport, new \Illuminate\Http\UploadedFile($archivoCsv, basename($archivoCsv)));
+    
             return ["success" => true, "message" => "Éxito: Todos los archivos PDF fueron movidos correctamente."];
         } catch (Exception $e) {
             return ["success" => false, "message" => "Error inesperado: " . $e->getMessage()];
         }
     }
+    
 
     // public function store(Request $request)
     // {

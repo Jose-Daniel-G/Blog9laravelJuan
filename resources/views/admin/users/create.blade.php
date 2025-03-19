@@ -41,6 +41,25 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <label for="dependencia_id">Dependencias <b>*</b></label>
+                                        <select name="dependencia_id" id="dependencia_id" class="form-control" required>
+                                            <option value="" disabled selected>Seleccione una dependencia</option>
+                                            @foreach ($dependencias as $dependencia)
+                                            <option value="{{ $dependencia->id }}" 
+                                                {{ old('dependencia_id', $post->dependencia_id ?? '') == $dependencia->id ? 'selected' : '' }}>
+                                                {{ $dependencia->nombre }}
+                                            </option>
+                                        @endforeach
+                                        
+                                        </select>
+                                        @error('dependencia_id')
+                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label for="password">Contrasena</label><b>*</b>
                                         <input type="password" class="form-control" name="password"  value="{{ old('password')}}" required>
                                     </div>

@@ -39,16 +39,10 @@
         <div class="card shadow mt-3">
             <form method="POST" action="{{ route('ejecutar-python') }}" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="csv_file">Seleccionar Archivo CSV</label>
-                    <input type="file" id="archivoCSV" name="csv_file" class="form-control" required>
-                </div>
-                <div id="tarjetaVerificacion" style="display: none;">
                     <div class="card-body">
                         @csrf
                         <button type="submit" class="btn btn-primary">🔍 Comprobar</button>
-
                     </div>
-
                 </div>
             </form>
         </div>
@@ -66,7 +60,7 @@
 @stop
 
 @section('js')
-    <script>
+    {{-- <script>
         document.getElementById('archivoCSV').addEventListener('change', function() {
             let tarjeta = document.getElementById('tarjetaVerificacion');
 
@@ -76,5 +70,5 @@
                 tarjeta.style.display = "none"; // Ocultar si se borra la selección
             }
         });
-    </script>
+    </script> --}}
 @stop

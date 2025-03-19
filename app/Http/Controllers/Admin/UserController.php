@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dependencia;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -23,7 +24,8 @@ class UserController extends Controller
     }
     public function create()
     {
-        return view('admin.users.create');
+        $dependencias = Dependencia::all();
+        return view('admin.users.create', compact('dependencias'));
     }
     public function store(Request $request)
     {
@@ -32,14 +34,17 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:250',
             'email' => 'required|email|max:250|unique:users',
+            'dependencia_id' => 'required',
             'password' => 'required|min:8|max:250|confirmed',
         ]);
-
+        //  dd($request->all());
         $usuario = new User();
         $usuario->name = $request->name;
         $usuario->email = $request->email;
+        $usuario->dependencia_id = $request->dependencia_id;
         $usuario->password = Hash::make($request->password);
         $usuario->save();
+
         // Extraer la parte antes del @ del email
         $username = explode('@', $usuario->email)[0];
 
