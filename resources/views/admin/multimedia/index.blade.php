@@ -8,26 +8,57 @@
 
 @section('content')
     <div class="container mt-4">
-        <div class="card shadow">
-            <div class="card-header">
-                <h3 class="mb-0">Formulario de Registro</h3>
+        <h2 class="text-center">📂 Verificar PDF en CSV y Subir </h2>
+        {{-- Mostrar mensajes de éxito o error --}}
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-            <div class="card-body">
-                <h2 class="text-center">📂 Verificación de PDFs en CSV</h2>
+        @endif
 
-                <form method="POST" action="{{ route('ejecutar-python') }}" class="text-center mt-3">
-                    @csrf
-                    <button type="submit" class="btn btn-primary">🔍 Comprobar</button>
-                </form>
-    
-                <div class="mt-4">
-                    @if (isset($resultado))
-                        <div class="alert alert-info">{!! $resultado !!}</div>
-                    @endif
-                </div>
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
+        @endif
+
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+
+
+        <!-- Tarjeta oculta al inicio -->
+        <div class="card shadow mt-3">
+            <form method="POST" action="{{ route('ejecutar-python') }}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="csv_file">Seleccionar Archivo CSV</label>
+                    <input type="file" id="archivoCSV" name="csv_file" class="form-control" required>
+                </div>
+                <div id="tarjetaVerificacion" style="display: none;">
+                    <div class="card-body">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">🔍 Comprobar</button>
+
+                    </div>
+
+                </div>
+            </form>
         </div>
+
+        <div class="mt-4">
+
+        </div>
+
     </div>
+
 @stop
 
 @section('css')
@@ -35,5 +66,15 @@
 @stop
 
 @section('js')
-    <script> console.log("Formulario de creación de usuario cargado"); </script>
+    <script>
+        document.getElementById('archivoCSV').addEventListener('change', function() {
+            let tarjeta = document.getElementById('tarjetaVerificacion');
+
+            if (this.files.length > 0) {
+                tarjeta.style.display = "block"; // Mostrar tarjeta si se selecciona un archivo
+            } else {
+                tarjeta.style.display = "none"; // Ocultar si se borra la selección
+            }
+        });
+    </script>
 @stop

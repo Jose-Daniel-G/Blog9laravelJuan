@@ -317,12 +317,13 @@ return [
         // ],
         [
             'text' => 'Dashboard',
-            'route' => 'admin.multimedia.index',
-            'icon' => 'fas fa-home fa-fw ',
+            'route' => 'admin.home',
+            'icon' => 'fas fa-building', // Usa un icono adecuado de Font Awesome
+
         ],
         [
-            'text' => 'Dashboard',
-            'route' => 'admin.home',
+            'text' => 'Departamento Secretaría Distrital de Movilidad',
+            'route' => 'admin.multimedia.index',
             'icon' => 'fas fa-home fa-fw ',
         ],
         [
@@ -333,40 +334,7 @@ return [
         ],
         // ['header' => 'ADMINISTRADOR'],
         // ['header' => 'OPCIONES DE BLOG'],
-        [
-            'text' => 'Departamento Secretaría Distrital de Movilidad',
-            'icon' => 'fas fa-building', // Usa un icono adecuado de Font Awesome
-            'icon_color' => 'success', // Color verde
-            'submenu' => [
-                [
-                    'text' => 'Categorias',
-                    'route' => 'admin.categories.index',
-                    'icon' => 'fab fa-fw fa-buffer',
-                    'active' => ['admin/categories*'],
 
-                ],
-                [
-                    'text' => 'Etiquetas',
-                    'route' => 'admin.tags.index',
-                    'icon' => 'far fa-fw fa-bookmark',
-                    'active' => ['admin/tags*'],
-                ],
-                [
-                    'text' => 'Lista de post',
-                    // 'icon_color' => 'red',
-                    'route' => 'admin.posts.index',
-                    'icon' => 'fas fa-fw fa-clipboard',
-                    'active' => ['admin/posts*'],
-                ],
-                [
-                    'text' => 'Crear nuevo post',
-                    // 'icon_color' => 'yellow',
-                    'route' => 'admin.posts.create',
-                    'icon' => 'fas fa-fw fa-file',
-
-                ],
-            ],
-        ],
         // [
         //     'key' => 'pages',
         //     'text' => 'Pages',

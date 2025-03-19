@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash; // <-- Agregar esta línea
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -21,11 +23,32 @@ class UserController extends Controller
     }
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
     public function store(Request $request)
     {
-        //
+        // $datos = $request->all();
+        // return response()->json($datos);
+        $request->validate([
+            'name' => 'required|max:250',
+            'email' => 'required|email|max:250|unique:users',
+            'password' => 'required|min:8|max:250|confirmed',
+        ]);
+
+        $usuario = new User();
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = Hash::make($request->password);
+        $usuario->save();
+        // Extraer la parte antes del @ del email
+        $username = explode('@', $usuario->email)[0];
+
+        // Crear la carpeta en storage/app/users/{username}
+        Storage::makeDirectory("users/{$username}");
+        
+        return redirect()->route('admin.users.index')
+            ->with('info', 'Se registro al usuario de forma correcta')
+            ->with('icono', 'success');
     }
     public function show($id)
     {

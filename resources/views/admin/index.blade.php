@@ -24,11 +24,11 @@
 
             <!-- Información adicional -->
             <div class="d-flex bg-white p-3 rounded border align-items-center">
-                <p class="fw-semibold me-2">Último registro:</p>
-                <input type="date" class="form-control me-3" style="width: 150px;" disabled>
+                <p class="fw-semibold me-2">Último registro: </p>
+                <input value="{{optional(auth()->user()->lastSuccessfulLoginAt())->format('Y-m-d')}}" type="date" class="form-control me-3" style="width: 150px;" disabled>
 
                 <p class="fw-semibold me-2">Último proceso:</p>
-                <input type="date" class="form-control me-3" style="width: 150px;" disabled>
+                <input value="{{ optional(auth()->user()->lastSuccessfulLoginAt())->format('Y-m-d') }}" type="date" class="form-control me-3" style="width: 150px;" disabled>
 
                 <p class="fw-semibold me-2">Otro proceso:</p>
                 <input type="date" class="form-control" style="width: 150px;" disabled>
@@ -72,7 +72,7 @@
                         <div class="icon">
                             <i class="ion fas bi bi-person-lines-fill"></i>
                         </div>
-                        <a href="{{ route('upload.multiple.form') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -122,7 +122,7 @@
                         <div class="icon">
                             <i class="fas fa-laptop"></i>
                         </div>
-                        <a href="{{ route('csv.form') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="   " class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">

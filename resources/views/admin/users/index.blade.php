@@ -9,7 +9,15 @@
     <h1>Lista de usuarios</h1>
 @stop
 @section('content')
-    <div class="card">
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Usuarios registrados</h3>
+            <div class="card-tools">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Registrar
+                    {{-- <i class="fa-solid fa-plus"></i> --}}
+                </a>
+            </div>
+        </div>
         @if ($users->count())
             <div class="card-body">
                 <table id="usuarios" class="table table-striped table-bordered table-hover table-sm">

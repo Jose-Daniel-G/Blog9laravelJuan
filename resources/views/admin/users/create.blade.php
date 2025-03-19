@@ -18,7 +18,7 @@
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Datos</h3>
-                        <form action="{{ route('admin.usuarios.store') }}" method="POST" autocomplete="off">
+                        <form action="{{ route('admin.users.store') }}" method="POST" autocomplete="off">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
