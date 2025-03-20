@@ -20,7 +20,6 @@ yarn-error.log
 
 # Ignorar imagen específica
 /.db_model.png
-
-# /storage/app/public/pdf/
-# /storage/app/public/users/
+/storage/app/public/pdf/
+/storage/app/public/users/
 # /db_model.png
