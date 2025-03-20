@@ -17,6 +17,6 @@ yarn-error.log
 /.idea
 /.vscode
 /DB_HEBRON.jpg
-/public/pdfs/
-/public/users/
-db_model.png
+/storage/app/public/pdf/
+/storage/app/public/users/
+/db_model.png
