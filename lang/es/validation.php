@@ -239,7 +239,7 @@ return [
         'rule'                     => 'regla',
         'rules'                    => 'reglas',
         'second'                   => 'segundo',
-        'sex'                      => 'sexo',
+        'sex'                      => //'sexo',
         'shipment'                 => 'envío',
         'short_text'               => 'texto corto',
         'size'                     => 'tamaño',

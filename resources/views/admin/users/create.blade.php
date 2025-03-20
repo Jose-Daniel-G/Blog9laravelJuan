@@ -43,11 +43,11 @@
                                     <div class="form-group">
                                         <label for="dependencia_id">Dependencias <b>*</b></label>
                                         <select name="dependencia_id" id="dependencia_id" class="form-control" required>
-                                            <option value="" disabled selected>Seleccione una dependencia</option>
-                                            @foreach ($dependencias as $dependencia)
-                                            <option value="{{ $dependencia->id }}" 
-                                                {{ old('dependencia_id', $post->dependencia_id ?? '') == $dependencia->id ? 'selected' : '' }}>
-                                                {{ $dependencia->nombre }}
+                                            <option value="" disabled selected>Seleccione una organism</option>
+                                            @foreach ($organisms as $organism)
+                                            <option value="{{ $organism->id }}" 
+                                                {{ old('dependencia_id', $post->dependencia_id ?? '') == $organism->id ? 'selected' : '' }}>
+                                                {{ $organism->nombre }}
                                             </option>
                                         @endforeach
                                         

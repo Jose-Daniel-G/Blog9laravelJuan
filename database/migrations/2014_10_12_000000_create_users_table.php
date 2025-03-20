@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('telefono')->nullable();
-            $table->enum('sexo', ['M', 'F']);
+            $table->string('status')->default('activo');
+           // $table->string('telefono')->nullable();
+            // $table->enum(//'sexo', ['M', 'F']);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -24,8 +25,8 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('dependencia_id');  // Columna para la clave foránea de 'clientes'
-            $table->foreign('dependencia_id')->references('id')->on('dependencias')->onDelete('cascade');
-            // $table->foreign('dependencia_id')->nullable()->constrained('dependencias')->onDelete('set null');
+            $table->foreign('dependencia_id')->references('id')->on('organisms')->onDelete('cascade');
+            // $table->foreign('dependencia_id')->nullable()->constrained('organisms')->onDelete('set null');
         });
     }
 

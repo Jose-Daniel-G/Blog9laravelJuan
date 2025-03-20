@@ -48,7 +48,7 @@ return [
     '421'          => 'Solicitud mal dirigida',
     '422'          => 'Entidad no procesable',
     '423'          => 'Bloqueado',
-    '424'          => 'Dependencia fallida',
+    '424'          => 'Organism fallida',
     '425'          => 'Demasiado temprano',
     '426'          => 'Se requiere actualización',
     '428'          => 'Precondición requerida',

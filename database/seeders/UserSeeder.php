@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name'=>'Jose Daniel Grijalba Osorio',
-            'sexo'=> 'M',
-            'telefono'=>'314852684',
+            //'sexo'=> 'M',
+            //'telefono'=>'314852684',
             'dependencia_id'=> 16,
             'email'=> 'jose.jdgo97@gmail.com',
             'email_verified_at' => now(),            
@@ -25,8 +25,8 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'=>'Juan David Grijalba Osorio',
-            'sexo'=> 'M',
-            'telefono'=>'314852685',
+            //'sexo'=> 'M',
+            //'telefono'=>'314852685',
             'dependencia_id'=> 16,
             'email'=> 'juandavidgo1997@gmail.com',
             'email_verified_at' => now(),            
@@ -35,8 +35,8 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'=>'Hebron funcionario',
-            'sexo'=> 'M',
-            'telefono'=>'314852686',
+            //'sexo'=> 'M',
+            //'telefono'=>'314852686',
             'dependencia_id'=> 16,
             'email'=> 'hebron.customer@gmail.com',
             'email_verified_at' => now(),            
@@ -45,8 +45,8 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'=>'Mario',
-            'sexo'=> 'M',
-            'telefono'=>'314852567',
+            //'sexo'=> 'M',
+            //'telefono'=>'314852567',
             'dependencia_id'=> 16,
             'email'=> 'mario@gmail.com',
             'email_verified_at' => now(),            
@@ -55,8 +55,8 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'=>'Alejandro',
-            'sexo'=> 'M',
-            'telefono'=>'314852568',
+            //'sexo'=> 'M',
+            //'telefono'=>'314852568',
             'dependencia_id'=> 16,
             'email'=> 'alejo@gmail.com',
             'email_verified_at' => now(),            
@@ -64,8 +64,8 @@ class UserSeeder extends Seeder
         ])->assignRole('funcionario');
         User::create([
             'name'=>'Luigi Mangione',
-            'sexo'=> 'M',
-            'telefono'=>'314852568',
+            //'sexo'=> 'M',
+            //'telefono'=>'314852568',
             'dependencia_id'=> 16,
             'email'=> 'luigi7@gmail.com',
             'email_verified_at' => now(),            

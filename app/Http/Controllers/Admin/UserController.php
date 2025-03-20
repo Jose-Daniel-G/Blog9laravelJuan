@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Dependencia;
+use App\Models\Organism;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -24,8 +24,8 @@ class UserController extends Controller
     }
     public function create()
     {
-        $dependencias = Dependencia::all();
-        return view('admin.users.create', compact('dependencias'));
+        $organisms = Organism::all();
+        return view('admin.users.create', compact('organisms'));
     }
     public function store(Request $request)
     {

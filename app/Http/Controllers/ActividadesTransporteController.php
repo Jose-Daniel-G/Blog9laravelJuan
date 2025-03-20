@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Imports\ActividadesTransporteImport;
+use App\Models\Organism;
+use Database\Seeders\DependenciaSeeder;
+use Illuminate\Support\Str;
 use Exception;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -27,10 +30,14 @@ class ActividadesTransporteController extends Controller
     public function store(Request $request)
     {   // Obtener el usuario autenticado
         $usuario = Auth::user();
-
+        $organism = Organism::find($usuario->dependencia_id);
+        $nombre_snake = Str::snake($organism->nombre);
+        // dd($nombre_snake);
         // Extraer la parte antes del @ del email
         $username = explode('@', $usuario->email)[0];
-        $folder = "secretaria_de_movilidad";
+        // dd($username);
+
+        $folder = $nombre_snake;
 
         // Verificar PDFs en el CSV
         $response = $this->verificarPdfsEnCsv($username, $folder);

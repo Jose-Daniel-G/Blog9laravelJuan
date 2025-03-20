@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dependencia;
+use App\Models\Organism;
 use Illuminate\Http\Request;
 
-class DependenciaController extends Controller
+class OrganismController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class DependenciaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Dependencia $dependencia)
+    public function show(Organism $organism)
     {
         //
     }
@@ -42,7 +42,7 @@ class DependenciaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Dependencia $dependencia)
+    public function edit(Organism $organism)
     {
         //
     }
@@ -50,7 +50,7 @@ class DependenciaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dependencia $dependencia)
+    public function update(Request $request, Organism $organism)
     {
         //
     }
@@ -58,7 +58,7 @@ class DependenciaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Dependencia $dependencia)
+    public function destroy(Organism $organism)
     {
         //
     }
