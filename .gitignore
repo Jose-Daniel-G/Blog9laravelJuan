@@ -17,3 +17,10 @@ yarn-error.log
 /.idea
 /.vscode
 /DB_HEBRON.jpg
+
+# Ignorar imagen específica
+/.db_model.png
+
+# /storage/app/public/pdf/
+# /storage/app/public/users/
+# /db_model.png
