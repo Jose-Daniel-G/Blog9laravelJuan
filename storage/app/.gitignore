@@ -1,4 +1,6 @@
 *
 !public/
+!public/pdfs/
+!public/users/
 !scripts/
 !.gitignore
